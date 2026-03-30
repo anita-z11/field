@@ -116,7 +116,24 @@ body {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 2px;
+  gap: 3px;
+}
+
+.cv-link {
+  text-decoration: none;
+  font-family: var(--font-body);
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--color-text-muted);
+  line-height: 1;
+  filter: grayscale(100%) contrast(0.5);
+  opacity: 0.6;
+}
+
+.cv-link:hover {
+  transform: translateY(-2px);
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
 }
 
 .site-tagline {
@@ -159,7 +176,7 @@ body {
   background: oklch(from var(--color-divider) l c h / 0.1);
   padding: var(--space-1);
   margin-top: var(--space-12);
-  margin-bottom: var(--space-8);
+  margin-bottom: var(--space-10);
   max-width: none;
   width: 100%;
   box-sizing: border-box;
@@ -167,7 +184,7 @@ body {
 
 .tab-btn {
   flex: 1;
-  padding: var(--space-2) var(--space-4);
+  padding: var(--space-1) var(--space-4);
   font-family: var(--font-body);
   font-size: var(--text-sm);
   font-weight: 300;
@@ -183,7 +200,7 @@ body {
 
 .tab-btn[aria-selected="true"] {
   background: var(--color-surface);
-  color: var(--color-text);
+  color: oklch(from var(--color-text-muted) l c h / 4);
   font-weight: 600;
 }
 
@@ -194,6 +211,19 @@ body {
 
 .tab-panel[aria-hidden="false"] {
   display: block;
+}
+
+.tab-btn[aria-selected="true"] .tab-emoji {
+  display: none;
+}
+
+.tab-btn[aria-selected="false"] .tab-text {
+  display: none;
+}
+
+.tab-btn[aria-selected="false"] .tab-emoji {
+  display: inline-block;
+  font-size: 1.2rem;
 }
 
 /* ============================================================

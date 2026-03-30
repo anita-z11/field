@@ -87,5 +87,5 @@ document.addEventListener('DOMContentLoaded', () => {
   initTabs();
   initThemeToggle();
   loadGallery('./data/tab1-gallery.json', 'gallery-img-1', 'gallery-cap-1');
-  loadGallery('./data/tab2-gallery.json', 'gallery-img-2', 'gallery-cap-2');
+  setTimeout(() => {loadGallery('./data/tab2-gallery.json', 'gallery-img-2', 'gallery-cap-2');},2000)
 });

@@ -43,30 +43,35 @@
     </header>
     <article class="article-page">
       <a href="../../index.html" class="back-link">&larr; Back to portfolio</a>
-      <h1>Field Notes</h1>
-      <p class="article-date">January 2026</p>
-      <div class="article-body">
-        <p>
-          I carry a small notebook on every trip. Not for planning — for
-          noticing. The things that catch my eye rarely survive the journey home
-          intact in memory, so I write them down while they are still sharp.
-        </p>
-        <p>
-          A red-tailed hawk circling above a wheat field. The exact shade of
-          green where new growth meets dead grass. The sound of wind through dry
-          reeds, which is nothing like wind through leaves. These details
-          accumulate, and when I look back through old entries, they bring a
-          place back to life more vividly than any photograph.
-        </p>
-        <p>
-          The habit has made me a better observer. I notice more now because I
-          know I will want to write it down later. Paying attention is a skill,
-          and like any skill, it improves with deliberate practice.
-        </p>
+      <h1>Why ChatGPT struggles with Cantonese like a Mandarin speaker</h1>
+      <p class="article-date">May 2024</p>
+      <div class="article-body" id="markdown-content">
+        <p>Loading story...</p>
       </div>
     </article>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
     <footer class="site-footer">
       <div class="container"></div>
     </footer>
+
+    <script>
+      async function loadMarkdownArticle() {
+        const target = document.getElementById("markdown-content");
+        try {
+          // 1. Fetch the file
+          const response = await fetch("cantonese.md");
+          const text = await response.text();
+
+          // 2. Convert and Inject
+          target.innerHTML = marked.parse(text);
+        } catch (error) {
+          target.innerHTML = "<p>System error: Content unavailable.</p>";
+        }
+      }
+
+      // Initialize
+      loadMarkdownArticle();
+    </script>
   </body>
 </html>
