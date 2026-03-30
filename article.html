@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -17,7 +17,7 @@
     />
 
     <link rel="stylesheet" href="../../css/base.css" />
-    <link rel="stylesheet" href="../../css/style.css" />
+    <link rel="stylesheet" href="../../css/styles.css" />
   </head>
   <body>
     <header class="site-header">
@@ -43,35 +43,40 @@
     </header>
     <article class="article-page">
       <a href="../../index.html" class="back-link">&larr; Back to portfolio</a>
-      <h1>Why ChatGPT struggles with Cantonese like a Mandarin speaker</h1>
-      <p class="article-date">May 2024</p>
-      <div class="article-body" id="markdown-content">
-        <p>Loading story...</p>
-      </div>
+      <h1 id="article-title">Loading...</h1>
+      <p class="article-date" id="article-date"></p>
+      <div id="markdown-content" class="article-body"></div>
     </article>
-    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 
     <footer class="site-footer">
       <div class="container"></div>
     </footer>
 
-    <script>
-      async function loadMarkdownArticle() {
-        const target = document.getElementById("markdown-content");
-        try {
-          // 1. Fetch the file
-          const response = await fetch("cantonese.md");
-          const text = await response.text();
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 
-          // 2. Convert and Inject
-          target.innerHTML = marked.parse(text);
+    <script>
+      async function loadMarkdown() {
+        const contentDiv = document.getElementById("markdown-content");
+
+        const urlParams = new URLSearchParams(window.location.search);
+        const articleId = urlParams.get("id");
+
+        if (!articleId) {
+          contentDiv.innerHTML = "<p>No article specified.</p>";
+          return;
+        }
+        try {
+          const response = await fetch(`./content/${articleId}.md`);
+          if (!response.ok) throw new Error("File not found");
+          const text = await response.text();
+          contentDiv.innerHTML = marked.parse(text);
+          document.getElementById("article-title").innerText =
+            articleId.replace(/-/g, " ");
         } catch (error) {
-          target.innerHTML = "<p>System error: Content unavailable.</p>";
+          contentDiv.innerHTML = "<p>Article not found or system error.</p>";
         }
       }
-
-      // Initialize
-      loadMarkdownArticle();
+      loadMarkdown();
     </script>
   </body>
 </html>
